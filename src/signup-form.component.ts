@@ -6,8 +6,10 @@ import { Component } from '@angular/core';
     <form (submit)="onSubmit()" novalidate>
       <div class="form-group">
         <label>Email</label>
-        <input type="email" class="form-control"
+        <input type="email" class="form-control" #emailField="ngModel"
         [(ngModel)]="email" name="email" required pattern=".+@.+">
+        <p *ngIf="emailField.touched && emailField.invalid"
+          class="alert alert-danger">Please enter a valid email</p>
       </div>
       <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
