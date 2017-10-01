@@ -7,14 +7,14 @@ import { Component } from '@angular/core';
       <div class="form-group">
         <label>Email</label>
         <input type="email" class="form-control"
-        [(ngModel)]="email" name="email" required>
+        [(ngModel)]="email" name="email" required pattern=".+@.+">
       </div>
       <button type="submit" class="btn btn-primary">Sign Up</button>
     </form>
   `,
   styles: [`
-      input.ng-invalid {border: solid red 2px; }
-      input.ng-valid { border: solid green 2px; }
+      input.ng-dirty.ng-invalid {border: solid red 2px; }
+      input.ng-dirty.ng-valid { border: solid green 2px; }
   `]
 })
 export class SignupFormComponent {
