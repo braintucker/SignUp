@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'signup-form',
   template: `
-    <form (submit)="onSubmit()" novalidate>
+    <form (ngSubmit)="onSubmit(form)" novalidate #form="ngForm">
       <div class="form-group">
         <label>Email</label>
         <input type="email" class="form-control" #emailField="ngModel"
@@ -11,7 +12,15 @@ import { Component } from '@angular/core';
         <p *ngIf="emailField.touched && emailField.invalid"
           class="alert alert-danger">Please enter a valid email</p>
       </div>
-      <button type="submit" class="btn btn-primary">Sign Up</button>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" #passwordField="ngModel"
+        [(ngModel)]="password" name="password" required>
+        <p *ngIf="passwordField.touched && passwordField.invalid"
+          class="alert alert-danger">Please enter a valid password</p>
+      </div>
+      <button type="submit" class="btn btn-primary"
+      [disabled]="form.invalid">Sign Up</button>
     </form>
   `,
   styles: [`
@@ -22,8 +31,10 @@ import { Component } from '@angular/core';
 export class SignupFormComponent {
 
     email = '';
+    password = '';
 
-    onSubmit() {
-      console.log('should submit:', this.email);
+    onSubmit(form: NgForm) {
+      console.log('should register:', this.email);
+      form.resetForm();
     }
 }
